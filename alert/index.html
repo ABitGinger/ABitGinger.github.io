@@ -3,33 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>镓铀！！！</title>
+    <title>Document</title>
     <style>
-        /* Optional: Reset default margins and padding */
-        body, html {
+        /* CSS 样式 */
+        body {
           margin: 0;
           padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          background-color: #000; /* 可选：设置背景色为黑色 */
         }
-        /* Optional: Ensure iframe fills entire container */
-        iframe {
-          display: block;
-          width: 100%;
-          border: none; /* Remove iframe border */
+        video {
+          height: 100vh; /* 视频高度等于视口高度 */
+          width: auto;   /* 宽度自动调整 */
+          max-height: 100vh;
+          max-width: 100%;
         }
+        
       </style>
 </head>
 <body>
-    <iframe id="embeddedContent" src="//player.bilibili.com/player.html?isOutside=true&aid=764928768&bvid=BV1Zr4y1D7cf&cid=465248863&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-    <script>
-        // JavaScript to adjust iframe height
-        function resizeIframe() {
-          var iframe = document.getElementById('embeddedContent');
-          iframe.style.height = window.innerHeight + 'px';
-        }
-        
-        // Call resizeIframe() initially and whenever the window size changes
-        window.onload = resizeIframe;
-        window.onresize = resizeIframe;
-      </script>
+    <video autoplay="autoplay" loop="loop">
+        <source src="./不惧困难,顽强乐观。贵在坚持,顺其自然!加油!奥利给!哈哈哈哈哈哈.1.mp4" type="video/mp4"></source>
+    </video>
 </body>
 </html>
