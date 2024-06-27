@@ -44,10 +44,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Deploy to GitHub Pages alert
-        uses: JamesIves/github-pages-deploy-action@4.1.5  # 使用 GitHub Pages 部署 Action，具体版本根据实际情况选择
-        with:
-          BRANCH: gh-pages  # GitHub Pages 分支
-          FOLDER: alert  # 部署的目录
-          CLEAN: true
