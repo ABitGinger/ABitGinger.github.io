@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>镓铀！！！</title>
+    <style>
+        /* Optional: Reset default margins and padding */
+        body, html {
+          margin: 0;
+          padding: 0;
+        }
+        /* Optional: Ensure iframe fills entire container */
+        iframe {
+          display: block;
+          width: 100%;
+          border: none; /* Remove iframe border */
+        }
+      </style>
 </head>
 <body>
-    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=764928768&bvid=BV1Zr4y1D7cf&cid=465248863&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    <iframe id="embeddedContent" src="//player.bilibili.com/player.html?isOutside=true&aid=764928768&bvid=BV1Zr4y1D7cf&cid=465248863&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    <script>
+        // JavaScript to adjust iframe height
+        function resizeIframe() {
+          var iframe = document.getElementById('embeddedContent');
+          iframe.style.height = window.innerHeight + 'px';
+        }
+        
+        // Call resizeIframe() initially and whenever the window size changes
+        window.onload = resizeIframe;
+        window.onresize = resizeIframe;
+      </script>
 </body>
 </html>
