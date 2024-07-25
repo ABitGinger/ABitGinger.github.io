@@ -1,23 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just a Test</title>
+    <title>姜的网上小窝</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/script.js"></script>
 </head>
 <body>
-    <h1>哇，标题欸</h1>
-    <p>哇，内容欸</p>
-    <span style="color: green;">恭喜你成功访问了这个啥也没有的网站，如果你愿意的话，你可以见证这个网站的逐步发展</span>
-    <span style="color: green; font-size: 50px;">喵</span>
-    <hr>
-    <button onclick="click_event()">哇一个按钮!</button>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="https://abitginger.top/blog/about/" target="_blank">关于姜</a></li></url> 
+                <li><a href="https://github.com/ABitGinger" target="_blank">Github</a></li></url> 
+                <li><a href="https://space.bilibili.com/262940581" target="_blank">Bilibili</a></li></url> 
+                <li><a id="email-text" class="email-text">发送邮件</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <script>
-        function click_event() {
-            alert("哇能点的按钮欸");
-        }
-    </script>
+    <section id="home">
+        <div class="profile">
+            <a href="https://abitginger.top/blog/about/" target="_blank">
+                <img src="/img/1.10.png" alt="Profile" class="profile-img">
+            </a>
+        </div>
+
+        <div id="hello">
+            <h1>氦，欢迎来到姜的网上小窝</h1>
+        </div>
+
+        <div class="button-container">
+            <a href="https://abitginger.top/blog" class="button" target="_blank">姜的博客</a><br>
+            <a href="https://abitginger.top/mcdoc" class="button" target="_blank">姜的MC文档</a>
+            <!-- 更多按钮 -->
+        </div>
+    </section>
+
+    <footer>
+        <p>版权所有 &copy; 姜 2024</p>
+    </footer>
 </body>
 </html>

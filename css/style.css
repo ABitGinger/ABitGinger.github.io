@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('/img/越越家.png'); /* 自定义背景图片 */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center; /* 背景图片偏右 */
+    transition: filter 0.3s ease; /* 平滑过渡效果 */
+}
+.profile-img {
+    width: 25vw; /* 根据需要调整大小 */
+    height: 25vw;
+    max-width: 250px;
+    max-height: 250px;
+    border-radius: 25%; /* 圆角效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 黑色阴影 */
+    transition: transform 0.3s, background-color 0.3s; /* 平滑过渡效果 */
+    display: block;
+    margin: 0 auto; /* 水平居中 */
+}
+
+.profile-img:hover {
+    transform: scale(1.03); /* 鼠标悬浮时放大 */
+}
+
+#hello {
+    
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1); /* 黑色阴影 */
+    display: flex;          /* 启用Flexbox布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center;
+    height: 10vh;          /* 设置容器高度为视窗高度的100% */
+    text-align: center;      /* 确保文本在容器内水平居中 */
+}
+
+.button-container {
+    text-align: center; /* 水平居中按钮 */
+}
+
+.button {
+    font-size: larger;
+    display: inline-block;
+    width: 75%;
+    margin: 15px;
+    padding: 3vw 3vw;
+    border-radius: 20px; /* 圆角效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 黑色阴影 */
+    transition: transform 0.3s, background-color 0.3s; /* 平滑过渡效果 */
+    text-decoration: none;
+    color: #fff;
+    background-color: rgba(223, 182, 95, 1);
+}
+
+.button:hover {
+    transform: scale(1.02); /* 鼠标悬浮时放大 */
+    background-color: rgb(234, 194, 107); /* 鼠标悬浮时改变颜色 */
+}
+
+header {
+    background-color: rgba(223, 182, 95, 0.8);
+    color: #fff;
+    padding: 15px 0;
+    margin: 0;
+    border: 0;
+    border-radius: 10px;
+}
+
+.email-text {
+    cursor: pointer; /* 鼠标悬停时显示指针图标 */
+    transition: color 0.3s ease; /* 鼠标悬停时颜色变化的过渡效果 */
+}
+
+.email-text:hover {
+    color: rgb(255, 255, 255); /* 鼠标悬停时文本颜色变为蓝色 */
+}
+
+footer {
+    background-color: rgba(223, 182, 95, 0.8);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+section {
+    margin: 15px 0;
+    padding: 20px;
+}
+
