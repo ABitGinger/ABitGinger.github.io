@@ -1,7 +1,7 @@
 body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    background-image: url('https://abitginger-1327459979.cos.ap-beijing.myqcloud.com/pic/%E8%B6%8A%E8%B6%8A%E5%AE%B6.webp'); /* 自定义背景图片 */
+    background-image: url('/img/越越家.webp'); /* 自定义背景图片 */
     background-size: cover;
     background-attachment: fixed;
     background-position: center center; /* 背景图片偏右 */
@@ -96,6 +96,11 @@ footer {
     margin-top: auto;
     flex-shrink: 0; /* 不缩放 */
     border-radius: 10px;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
 }
 
 nav ul {
