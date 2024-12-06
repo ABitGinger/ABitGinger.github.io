@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     emailText.addEventListener('mouseover', function() {
         // 鼠标悬停时显示“点击复制”
-        this.textContent = '复制地址';
+        this.textContent = '📋复制地址';
     });
 
     emailText.addEventListener('mouseout', function() {
         // 鼠标离开时恢复原文本
-        this.textContent = '发送邮件';
+        this.textContent = '📧发送邮件';
     });
 
     emailText.addEventListener('click', function() {
