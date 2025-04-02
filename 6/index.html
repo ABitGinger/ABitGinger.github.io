@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.1s;
+            overflow: hidden;
+            touch-action: manipulation;
+            user-select: none;
+        }
+        
+        .emoji-container {
+            position: relative;
+            font-size: 100px;
+            transition: transform 0.1s;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="emoji-container">👊</div>
+
+    <script>
+        const emojiContainer = document.querySelector('.emoji-container');
+        const body = document.body;
+        
+        let isHolding = false;
+        let holdStartTime = 0;
+        let holdDuration = 0;
+        let animationFrameId = null;
+        let shakeInterval = null;
+        let baseSize = 100;
+        
+        // 设置初始大小
+        updateSize(1);
+        
+        function updateSize(scale) {
+            const size = baseSize * scale;
+            emojiContainer.style.fontSize = `${size}px`;
+        }
+        
+        function startHold() {
+            if (isHolding) return;
+            
+            isHolding = true;
+            holdStartTime = Date.now();
+            emojiContainer.textContent = '🖕';
+            
+            // 开始抖动动画
+            startShaking();
+            
+            // 开始增长和背景变化
+            animationFrameId = requestAnimationFrame(updateHoldEffect);
+        }
+        
+        function endHold() {
+            if (!isHolding) return;
+            
+            isHolding = false;
+            emojiContainer.textContent = '👊';
+            
+            // 停止所有动画
+            cancelAnimationFrame(animationFrameId);
+            clearInterval(shakeInterval);
+            
+            // 重置样式
+            emojiContainer.style.transform = 'translate(0, 0)';
+            body.style.backgroundColor = 'white';
+            updateSize(1);
+        }
+        
+        function startShaking() {
+            let intensity = 0;
+            
+            shakeInterval = setInterval(() => {
+                // 计算抖动强度（随时间增加）
+                intensity = Math.min(holdDuration / 10000, 1) * 20;
+                
+                const x = (Math.random() - 0.5) * intensity * 2;
+                const y = (Math.random() - 0.5) * intensity * 2;
+                emojiContainer.style.transform = `translate(${x}px, ${y}px)`;
+            }, 16); // 约60fps
+        }
+        
+        function updateHoldEffect() {
+            if (!isHolding) return;
+            
+            const currentTime = Date.now();
+            holdDuration = currentTime - holdStartTime;
+            const progress = Math.min(holdDuration / 10000, 1); // 10秒上限
+            
+            // 更新大小（1到2倍）
+            const scale = 1 + progress;
+            updateSize(scale);
+            
+            // 更新背景颜色（白到红）
+            const redValue = Math.floor(progress * 255);
+            body.style.backgroundColor = `rgb(255, ${255 - redValue}, ${255 - redValue})`;
+            
+            animationFrameId = requestAnimationFrame(updateHoldEffect);
+        }
+        
+        // 事件监听
+        emojiContainer.addEventListener('mousedown', (e) => {
+            if (e.button === 0) { // 仅左键
+                startHold();
+            }
+        });
+        
+        emojiContainer.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            startHold();
+        });
+        
+        document.addEventListener('mouseup', endHold);
+        document.addEventListener('touchend', endHold);
+        document.addEventListener('mouseleave', endHold);
+    </script>
+</body>
+</html>
