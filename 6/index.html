@@ -25,10 +25,24 @@
             transition: transform 0.1s;
             cursor: pointer;
         }
+        
+        .hint-text {
+            position: fixed;
+            top: calc(50% + 80px);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            color: #000;
+            opacity: 1;
+            transition: opacity 0.5s;
+            text-align: center;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     <div class="emoji-container">👊</div>
+    <div class="hint-text">按住拳头不放</div>
 
     <script>
         const emojiContainer = document.querySelector('.emoji-container');
@@ -55,6 +69,8 @@
             isHolding = true;
             holdStartTime = Date.now();
             emojiContainer.textContent = '🖕';
+            document.querySelector('.hint-text').style.opacity = '0';
+            document.querySelector('.hint-text').style.transitionDuration = '1s';
             
             // 开始抖动动画
             startShaking();
@@ -68,6 +84,8 @@
             
             isHolding = false;
             emojiContainer.textContent = '👊';
+            document.querySelector('.hint-text').style.opacity = '1';
+            document.querySelector('.hint-text').style.transitionDuration = '0.5s';
             
             // 停止所有动画
             cancelAnimationFrame(animationFrameId);
