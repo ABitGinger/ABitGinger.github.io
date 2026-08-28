@@ -1,2 +1,6 @@
 
 /.vscode
+
+# 仓库展示数据与预览图：部署时由 GitHub Actions 生成（本地预览请运行 .github/scripts/build_repos.py）
+/repos/repos.json
+/repos/previews/

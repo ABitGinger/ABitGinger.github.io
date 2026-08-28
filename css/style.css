@@ -1,3 +1,13 @@
+:root {
+    --accent: rgba(223, 182, 95, 1);
+    --accent-hover: rgb(234, 194, 107);
+    --bar-bg: rgba(223, 182, 95, 0.8);
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    --text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+    --text-dim: rgba(255, 255, 255, 0.85);
+    --card-bg: rgba(0, 0, 0, 0.45);
+}
+
 body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
@@ -10,8 +20,21 @@ body {
     flex-direction: column;
 }
 
-.content {
-    flex: 1; /* 填充剩余空间 */
+main {
+    flex: 1; /* 填充剩余空间，保证页脚贴底 */
+    margin: 15px 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 静默跳转切换视图时的淡入效果 */
+.view-enter {
+    animation: view-fade 0.3s ease;
+}
+
+@keyframes view-fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .profile-img {
@@ -20,7 +43,7 @@ body {
     max-width: 250px;
     max-height: 250px;
     border-radius: 25%; /* 圆角效果 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 黑色阴影 */
+    box-shadow: var(--shadow); /* 黑色阴影 */
     transition: transform 0.3s, background-color 0.3s; /* 平滑过渡效果 */
     display: block;
     margin: 0 auto; /* 水平居中 */
@@ -31,9 +54,8 @@ body {
 }
 
 #hello {
-    
     color: #fff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 1); /* 黑色阴影 */
+    text-shadow: var(--text-shadow); /* 黑色阴影 */
     display: flex;          /* 启用Flexbox布局 */
     justify-content: center; /* 水平居中 */
     align-items: center;
@@ -52,20 +74,20 @@ body {
     margin: 15px;
     padding: 3vw 3vw;
     border-radius: 20px; /* 圆角效果 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 黑色阴影 */
+    box-shadow: var(--shadow); /* 黑色阴影 */
     transition: transform 0.3s, background-color 0.3s; /* 平滑过渡效果 */
     text-decoration: none;
     color: #fff;
-    background-color: rgba(223, 182, 95, 1);
+    background-color: var(--accent);
 }
 
 .button:hover {
     transform: scale(1.02); /* 鼠标悬浮时放大 */
-    background-color: rgb(234, 194, 107); /* 鼠标悬浮时改变颜色 */
+    background-color: var(--accent-hover); /* 鼠标悬浮时改变颜色 */
 }
 
 header {
-    background-color: rgba(223, 182, 95, 0.8);
+    background-color: var(--bar-bg);
     color: #fff;
     padding: 15px 0;
     margin: 0;
@@ -79,16 +101,15 @@ header {
 }
 
 .email-text:hover {
-    color: rgb(255, 255, 255); /* 鼠标悬停时文本颜色变为蓝色 */
+    color: rgb(255, 255, 255);
 }
 
 footer {
-    background-color: rgba(223, 182, 95, 0.8);
+    background-color: var(--bar-bg);
     color: #fff;
     text-align: center;
     padding: 20px 0;
     margin: 0;
-    /* position: absolute; */
     bottom: 0;
     left: 0;
     right: 0;
@@ -118,8 +139,232 @@ nav ul li a {
     text-decoration: none;
 }
 
-section {
-    margin: 15px 0;
-    padding: 20px;
+/* ================= GitHub 仓库展示 ================= */
+
+#view-repos {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+.repos-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.repos-toolbar h2 {
+    margin: 0;
+    color: #fff;
+    text-shadow: var(--text-shadow);
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 6px 16px;
+    border-radius: 999px;
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.back-link:hover {
+    background-color: var(--accent);
+    transform: scale(1.03);
+}
+
+#repo-summary {
+    text-align: center;
+    color: var(--text-dim);
+    text-shadow: var(--text-shadow);
+    margin: 12px 0 20px;
+    font-size: 0.95rem;
+}
+
+#repo-grid {
+    display: grid;
+    /* 列数随窗口宽度实时自适应：约 375px 单列、768px 两列、更宽三列 */
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+
+.repo-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.3s, border-color 0.3s, background-color 0.3s;
+}
+
+.repo-card:hover {
+    transform: scale(1.02);
+    border-color: var(--accent);
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.repo-card-imgwrap {
+    position: relative;
+}
+
+.repo-card-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+}
+
+/* 预览图加载失败时的占位块 */
+.repo-img-fallback {
+    aspect-ratio: 2 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, var(--accent), rgb(190, 148, 60));
+}
+
+.repo-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid var(--accent);
+    color: #fff;
+}
+
+.repo-badge-archived {
+    border-color: #e05d5d;
+    color: #ffc9c9;
+}
+
+.repo-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 16px 16px;
+    flex: 1;
+}
+
+.repo-card-title {
+    margin: 0;
+    font-size: 1.08rem;
+    word-break: break-word;
+}
+
+.repo-desc {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.repo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.repo-tag {
+    font-size: 0.72rem;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: rgba(223, 182, 95, 0.18);
+    border: 1px solid rgba(223, 182, 95, 0.45);
+}
+
+.repo-meta {
+    margin-top: auto; /* 沉底，保证卡片等高时布局一致 */
+    padding-top: 8px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+}
+
+.repo-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.lang-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* 加载中的骨架卡片 */
+.repo-skeleton {
+    border-radius: 20px;
+    min-height: 300px;
+    background: rgba(0, 0, 0, 0.35);
+    animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+}
+
+/* 加载失败 / 提示卡片 */
+#repo-status {
+    text-align: center;
+    margin: 30px auto;
+    max-width: 560px;
+    background: var(--card-bg);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    color: #fff;
+}
+
+#repo-status .button {
+    width: auto;
+    margin: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 12px;
+    }
+
+    #repo-grid {
+        gap: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .repo-card,
+    .back-link,
+    .button,
+    .profile-img,
+    .view-enter {
+        transition: none;
+        animation: none;
+    }
+}

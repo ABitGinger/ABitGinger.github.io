@@ -6,6 +6,10 @@ on:
   push:
     branches: ["main"]
 
+  # 定时同步仓库展示数据与预览图（新建仓库最迟 6 小时后出现在展示页）
+  schedule:
+    - cron: "0 */6 * * *"
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -31,6 +35,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # 生成仓库展示数据与预览图（只进部署工件，不产生 git 提交）
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Generate repos showcase data
+        run: |
+          pip install pillow
+          python .github/scripts/build_repos.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

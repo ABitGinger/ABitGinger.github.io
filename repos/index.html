@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姜的仓库展示</title>
+    <link rel="stylesheet" href="/css/style.css?v=1.0.2">
+    <script src="/js/repos.js?v=1.0.4" defer></script>
+    <script src="/js/script.js?v=1.0.3" defer></script>
+</head>
+<body>
+    <!-- 注意：页眉与页脚需和根目录 index.html 保持一致，修改时请同步两处 -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="https://abitginger.top/blog/about/" target="_blank">关于姜</a></li>
+                <li><a href="https://github.com/ABitGinger" target="_blank">Github</a></li>
+                <!-- <li><a href="https://space.bilibili.com/262940581" target="_blank">Bilibili</a></li>  -->
+                <!-- <li><a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzk0MTc5NTQ1OQ==" target="_blank">公众号</a></li>  -->
+                <li><a id="email-text" class="email-text">📧发送邮件</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="content">
+        <section id="view-repos">
+            <div class="repos-toolbar">
+                <a href="/" class="back-link" data-silent>← 返回主页</a>
+                <h2>📦 我的 GitHub 仓库</h2>
+            </div>
+            <p id="repo-summary"></p>
+            <div id="repo-grid"></div>
+            <div id="repo-status" hidden></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>版权所有 &copy; 壹位姜 2024 - <script>document.write(new Date().getFullYear())</script></p>
+        <p>页面背景建筑师：realYosh 于姜的生存服作</p>
+        <a href="https://beian.miit.gov.cn" target="_blank">吉ICP备2024023158号</a>
+        <br>
+        <img src="https://beian.mps.gov.cn/img/logo01.dd7ff50e.png" width="20"/> <a href="https://beian.mps.gov.cn/#/query/webSearch?code=21029602000999" rel="noreferrer" target="_blank">辽公网安备21029602000999号</a>
+    </footer>
+</body>
+</html>
