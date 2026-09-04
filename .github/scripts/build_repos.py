@@ -8,6 +8,7 @@
 """
 import json
 import os
+import subprocess
 import sys
 import urllib.request
 
@@ -53,8 +54,24 @@ def fetch_repos(token):
         return json.load(res)
 
 
+def discover_cjk_fonts():
+    """fc-list 兜底：列出系统里声明支持中文的字体文件（适用于未预装 Noto CJK 的环境）。"""
+    try:
+        proc = subprocess.run(
+            ["fc-list", ":lang=zh", "file"],
+            capture_output=True, text=True, timeout=15,
+        )
+    except Exception:
+        return []
+    paths = [line.strip().rstrip(":") for line in proc.stdout.splitlines()]
+    return [p for p in paths if p.lower().endswith((".ttc", ".ttf", ".otf"))]
+
+
 def pick_font(paths):
-    """在候选字体路径里找到可用的 CJK 字体；TTC 内优先选简体中文变体。"""
+    """在候选字体路径里找到可用的中文字体；TTC 内优先选简体中文变体。
+
+    找不到可用中文字体时直接报错退出——绝不退回 Pillow 内置位图字体
+    （它忽略字号，CI 上曾因此生成过文字极小的预览图）。"""
     for path in paths:
         if not os.path.exists(path):
             continue
@@ -68,21 +85,26 @@ def pick_font(paths):
                 index = i
                 break
         return lambda size, path=path, index=index: ImageFont.truetype(path, size, index=index)
-    return lambda size: ImageFont.load_default()
+    sys.exit("错误：找不到可用的中文字体（Linux 请先安装 fonts-noto-cjk 或等价中文字体包）")
 
 
 def setup_fonts():
     global regular, bold
+    discovered = discover_cjk_fonts()
     regular = pick_font([
-        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",  # Ubuntu (fonts-noto-cjk)
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",  # Debian/Ubuntu (fonts-noto-cjk)
         "C:/Windows/Fonts/msyh.ttc",                               # Windows 微软雅黑
+        "C:/Windows/Fonts/msyh.ttf",
+        "C:/Windows/Fonts/simhei.ttf",                             # Windows 黑体
         "/System/Library/Fonts/PingFang.ttc",                      # macOS
-    ])
+    ] + discovered)
     bold = pick_font([
         "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
         "C:/Windows/Fonts/msyhbd.ttc",
+        "C:/Windows/Fonts/msyh.ttc",
+        "C:/Windows/Fonts/simhei.ttf",
         "/System/Library/Fonts/PingFang.ttc",
-    ])
+    ] + discovered)
 
 
 def wrap_text(draw, text, font, max_width):
