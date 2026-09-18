@@ -6,9 +6,9 @@ on:
   push:
     branches: ["main"]
 
-  # 定时同步仓库展示数据、预览图，以及演示厅（都给到最迟 1 小时）
+  # 定时同步仓库展示数据与预览图（新建仓库最迟 6 小时后出现在展示页）
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 */6 * * *"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -53,37 +53,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 演示厅（https://github.com/ABitGinger/WebDemos）的源码在那个仓库，
-      # /demo/ 由这里在构建时同步生成，同样只进部署工件、不产生 git 提交。
-      # 每个演示的独立地址是 /demo/demos/<slug>/，由仓库里的目录结构自动决定。
-      - name: Sync demos from WebDemos
-        run: |
-          set -uo pipefail
-          rm -rf .tmp-webdemos demo
-          ok=0
-          for i in 1 2 3; do
-            if git clone --depth=1 --quiet https://github.com/ABitGinger/WebDemos.git .tmp-webdemos; then
-              ok=1
-              break
-            fi
-            echo "第 ${i} 次 clone 失败，2 秒后重试…"
-            rm -rf .tmp-webdemos
-            sleep 2
-          done
-          if [ "$ok" != "1" ]; then
-            echo "::warning title=演示厅同步失败::WebDemos 拉取失败，本次构建跳过 /demo/，站点其余部分照常发布。"
-            exit 0
-          fi
-          mkdir -p demo
-          cp -r .tmp-webdemos/index.html \
-                .tmp-webdemos/demos.json \
-                .tmp-webdemos/assets \
-                .tmp-webdemos/demos \
-                demo/
-          rm -rf .tmp-webdemos
-          echo "已同步演示厅：$(find demo -type f | wc -l) 个文件"
-          ls -1 demo
-
+      # 注：演示厅（/WebDemos/）不属于本站，它由 ABitGinger/WebDemos 自己的 Pages
+      # 独立部署（那个仓库的 .github/workflows/pages.yml），这里不再同步任何东西。
+      # 本站只在自己 index.html 的 <head> 里预加载 /WebDemos/assets/hub.{css,js}，
+      # 好让首页「静默跳转」到演示厅时能只换 <main>。
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
