@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>姜的网上小窝</title>
     <link rel="stylesheet" href="/css/style.css?v=1.0.2">
+    <!-- 演示厅（/demo/）：它的样式与脚本要在这里就加载好，
+         这样主页点「演示厅」按钮时才能只换 <main>、不刷新页面。
+         资源由构建时从 ABitGinger/WebDemos 同步进 /demo/。 -->
+    <link rel="stylesheet" href="/demo/assets/hub.css?v=1.0.0">
     <script src="/js/repos.js?v=1.0.4" defer></script>
     <script src="/js/script.js?v=1.0.3" defer></script>
+    <script src="/demo/assets/hub.js?v=1.0.0" defer></script>
 </head>
 <body>
     <header>
@@ -34,6 +39,7 @@
 
         <div class="button-container">
             <a href="https://abitginger.top/mcdoc" class="button" target="_blank">Minecraft 文档</a>
+            <a href="/demo/" class="button" data-silent>🧪 演示厅</a>
             <a href="/repos/" class="button" data-silent>📦 GitHub 仓库展示</a>
         </div>
     </main>

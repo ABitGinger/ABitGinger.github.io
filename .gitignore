@@ -5,4 +5,9 @@
 /repos/repos.json
 /repos/previews/
 
+# 演示厅：部署时从 ABitGinger/WebDemos 同步进来，同样不进 git
+# （见 .github/workflows/static.yml 的 “Sync demos from WebDemos” 步骤）
+/demo/
+/.tmp-webdemos/
+
 __pycache__/
